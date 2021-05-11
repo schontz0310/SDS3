@@ -1,21 +1,27 @@
+import SellerSalesSum from 'DTOs/ISellerSalesSum'
 import Chart from 'react-apexcharts'
 
-const DonutChart = () => {
+interface DonutChartProps{
+  amountBySeller: SellerSalesSum[];
 
-  const mockData = {
-    series: [477138, 499928, 444867, 220426, 473088],
-    labels: ['Anakin', 'Barry Allen', 'Kal-El', 'Logan', 'Padmé']
 }
 
+
+const DonutChart = ({amountBySeller}: DonutChartProps) => {
+
+  const sellers = amountBySeller.map(seller => seller.sellerName)
+  const salesSum = amountBySeller.map(seller => seller.sellerSaleSum)
+  
 const options = {
     legend: {
         show: true
     }
 }
+
   return (
     <Chart 
-      options={{...options, labels: mockData.labels}}
-      series={mockData.series}
+      options={{...options, labels: sellers}}
+      series={salesSum}
       type="donut"
       height="240"
     />
