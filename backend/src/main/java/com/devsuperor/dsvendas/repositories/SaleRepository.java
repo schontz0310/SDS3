@@ -15,7 +15,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
             " FROM Sale AS obj  GROUP BY obj.seller")
     List<SalesSumDTO> amountGroupedBySeller();
 
-
     @Query("SELECT new com.devsuperor.dsvendas.dto.SalesSuccessDTO(obj.seller, SUM(obj.visited), SUM(obj.deals)) " +
             " FROM Sale AS obj  GROUP BY obj.seller")
     List<SalesSuccessDTO> successGroupedBySeller();
