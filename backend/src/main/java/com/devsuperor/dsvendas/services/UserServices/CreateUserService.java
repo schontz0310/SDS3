@@ -2,37 +2,37 @@ package com.devsuperor.dsvendas.services.UserServices;
 
 import com.devsuperor.dsvendas.entities.User;
 import com.devsuperor.dsvendas.exceptios.ExceptionRule;
+import com.devsuperor.dsvendas.providers.HashProvider.implementations.JavaSecurityHashProvider;
 import com.devsuperor.dsvendas.repositories.UserRepository;
+import com.devsuperor.dsvendas.services.UserServices.DTOs.RequestCreateUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 @Service
-public class UserService {
+public class CreateUserService  {
 
     @Autowired
     private UserRepository userRepository;
 
-    User authenticate(String email, String senha){
-        User user = User.builder().build();
-        return user;
-    }
+    @Autowired
+    private JavaSecurityHashProvider javaSecurityHashProvider;
 
-    public Boolean findByEmail(String email){
-      boolean exist = userRepository.existsByEmail(email);
 
-      if (exist){
-          throw new ExceptionRule("Email já Cadastrado");
-      }
-          return false;
-
-    }
-
-    public User Create(User user){
-        findByEmail(user.getEmail());
-        userRepository.save(user);
-        return user;
+    public User execute(RequestCreateUserDTO params) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        boolean checkEmailExist = userRepository.existsByEmail(params.getEmail());
+        if (checkEmailExist){
+            throw new ExceptionRule("this email already exist");
+        }
+        String hashedPassword = javaSecurityHashProvider.generateHash(params.getPassword());
+        User newUser = User.builder()
+                .name(params.getName())
+                .email(params.getEmail())
+                .password(hashedPassword)
+                .build();
+        return userRepository.save(newUser);
     }
 
 

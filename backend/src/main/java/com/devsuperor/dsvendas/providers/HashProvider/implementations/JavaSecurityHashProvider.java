@@ -1,11 +1,13 @@
-package com.devsuperor.dsvendas.providers.HashProvider.implementations.JavaSecurity;
+package com.devsuperor.dsvendas.providers.HashProvider.implementations;
 
 import com.devsuperor.dsvendas.providers.HashProvider.model.ModelHashProvider;
+import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@Service
 public class JavaSecurityHashProvider implements ModelHashProvider {
 
     @Override

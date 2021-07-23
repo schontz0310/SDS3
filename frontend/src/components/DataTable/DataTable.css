@@ -1,0 +1,47 @@
+.table-responsive{
+  display: flex;
+  overflow-x: scroll;
+  margin-bottom: 2rem;
+  max-height: 750px;
+  height: 40vh;
+}
+.table-responsive th {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  padding-left: 1rem;
+  justify-content: left;
+  font-family: "Roboto";
+
+}
+
+.table-responsive td {
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  padding-left: 1rem;
+  justify-content: left;
+  font-family: "Roboto";
+}
+
+  .table-responsive tbody {
+    width: auto;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .table-responsive tbody tr {
+    display: flex;
+  }
+  .table-responsive thead tr {
+    display: inline-block;
+    background-color: chocolate;
+  }
+
+tbody {
+  height: 25rem;
+}
+tbody td, thead th {
+  width: 12rem;
+  float:left;
+}

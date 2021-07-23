@@ -1,8 +1,17 @@
 
+import SellerSuccess from 'DTOs/ISellerSuccess';
 import Chart from 'react-apexcharts'
 
 
-const BarChart = () => {
+
+interface BarChartProps{
+  successBySeller: SellerSuccess[] | undefined;
+
+}
+
+const BarChart = ({
+  successBySeller,
+}: BarChartProps) => {
 
   const options = {
     plotOptions: {
@@ -11,23 +20,25 @@ const BarChart = () => {
         }
     },
 };
+const sellers = successBySeller?.map(seller => seller.sellerName)
+const success = successBySeller?.map(seller => ((seller.deals / seller.visited) * 100).toFixed(2))
 
-const mockData = {
+const dataChart = {
     labels: {
-        categories: ['Anakin', 'Barry Allen', 'Kal-El', 'Logan', 'Padmé']
+        categories: sellers
     },
     series: [
         {
             name: "% Sucesso",
-            data: [43.6, 67.1, 67.7, 45.6, 71.1]                   
+            data: success                  
         }
     ]
 };
 
   return (
     <Chart 
-      options={{...options, xaxis: mockData.labels}}
-      series={mockData.series}
+      options={{...options, xaxis: dataChart.labels}}
+      series={dataChart.series}
       type="bar"
       height="240"
     />

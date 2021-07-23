@@ -2,16 +2,18 @@ import SellerSalesSum from 'DTOs/ISellerSalesSum'
 import Chart from 'react-apexcharts'
 
 interface DonutChartProps{
-  amountBySeller: SellerSalesSum[];
+  amountBySeller: SellerSalesSum[] | undefined;
 
 }
 
 
 const DonutChart = ({amountBySeller}: DonutChartProps) => {
 
-  const sellers = amountBySeller.map(seller => seller.sellerName)
-  const salesSum = amountBySeller.map(seller => seller.sellerSaleSum)
+
+  const sellers = amountBySeller?.map(seller => seller.sellerName)
+  const salesSum = amountBySeller?.map(seller => seller.sellerSaleSum)
   
+
 const options = {
     legend: {
         show: true

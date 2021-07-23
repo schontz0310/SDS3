@@ -1,8 +1,15 @@
-package com.devsuperor.dsvendas.services.UserServices;
+package com.devsuperor.dsvendas.services.UserServices.DTOs;
 
-public interface CreateUserDTO {
-    public Long id;
-    Integer visited;
-    Integer deals;
-    private Double amount;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RequestCreateUserDTO {
+   private String name;
+   private String email;
+   private String password;
 }
